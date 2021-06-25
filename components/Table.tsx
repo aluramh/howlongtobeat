@@ -57,11 +57,11 @@ const Table: React.FC<Props> = props => {
         {// Loop over the header rows
         headerGroups.map(headerGroup => (
           // Apply the header row props
-          <Tr {...headerGroup.getHeaderGroupProps()}>
+          <Tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
             {// Loop over the headers in each row
             headerGroup.headers.map(column => (
               // Apply the header cell props
-              <Th {...column.getHeaderProps()}>
+              <Th {...column.getHeaderProps()} key={column.id}>
                 {// Render the header
                 column.render('Header')}
               </Th>
@@ -77,12 +77,14 @@ const Table: React.FC<Props> = props => {
           prepareRow(row)
           return (
             // Apply the row props
-            <Tr {...row.getRowProps()}>
+            <Tr {...row.getRowProps()} key={row.id}>
               {// Loop over the rows cells
               row.cells.map(cell => {
+                const cellProps = cell.getCellProps()
+
                 // Apply the cell props
                 return (
-                  <Td {...cell.getCellProps()}>
+                  <Td {...cellProps} key={cellProps.key}>
                     {// Render the cell contents
                     cell.render('Cell')}
                   </Td>
