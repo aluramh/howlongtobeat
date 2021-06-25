@@ -43,7 +43,7 @@ function Home () {
       </Head>
 
       {/* Game search form */}
-      <FormControl id='game'>
+      <FormControl id='game' mb='4'>
         <FormLabel>Search for a game</FormLabel>
 
         <Flex flexDirection='row' alignItems='center'>
@@ -59,7 +59,7 @@ function Home () {
       </FormControl>
 
       {/* List of games */}
-      <Table data={games} />
+      {games?.length > 0 && <Table data={games} />}
     </Container>
   )
 }
