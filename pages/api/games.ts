@@ -1,22 +1,15 @@
 // Run `node index.js` in the terminal
 
 import { NextApiRequest, NextApiResponse } from 'next'
+import { Game } from '../../components/types'
 const hltb = require('howlongtobeat')
 
 const hltbService = new hltb.HowLongToBeatService()
 
-const searchTitle = (text: string) => {
+const searchTitle = async (text: string): Promise<Game[]> => {
   console.log(`Searching for: ${text}`)
-
-  return new Promise((resolve, reject) => {
-    hltbService
-      .search(text)
-      .then((results: any, ...rest: any[]) => {
-        console.log({ results, rest })
-        resolve(results)
-      })
-      .catch(reject)
-  })
+  const results = await hltbService.search(text)
+  return results
 }
 
 export default async function handler (
